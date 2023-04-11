@@ -1,12 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 require("dotenv").config();
-
+const cors = require("cors");
 const PORT = process.env.PORT;
 const searchApiRoutes = require("./src/SearchService/src/routes/index");
 const authApiRoutes = require("./src/AuthService/src/routes/index");
 // const ReminderApiRoutes = require("./SearchService/src/routes/index");
 const bookingApiRoutes = require("./src/AirticketBookingService/src/routes/index");
+
 const {
   isAuthenticated,
   validateAuthRequest,
@@ -20,7 +21,7 @@ const {
 const setupAndStartServer = async () => {
   // create the express object
   const app = express();
-
+  app.use(cors());
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
 
